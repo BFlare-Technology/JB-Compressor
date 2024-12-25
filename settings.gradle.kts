@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "JB Compressor"
 include(":app")
- 
+include(":jbcompressor")

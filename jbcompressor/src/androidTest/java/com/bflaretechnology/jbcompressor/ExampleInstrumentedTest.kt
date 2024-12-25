@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.bflaretechnology.jbcompressor", appContext.packageName)
+        assertEquals("com.bflaretechnology.jbcompressor.test", appContext.packageName)
     }
 }

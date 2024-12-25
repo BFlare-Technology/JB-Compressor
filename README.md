@@ -25,19 +25,18 @@ JB-Compressor is a lightweight Android library for compressing image files and `
 ### Installation
 
 1. Add the JitPack repository to your **root `settings.gradle`** or **`build.gradle`**:
-   ```gradle
+   ```
    dependencyResolutionManagement {
        repositories {
            maven { url 'https://jitpack.io' }
        }
    }
-
-   
-
 2. Add the library dependency in your module-level build.gradle:
-dependencies {
+ ```
+ dependencies {
     implementation 'com.github.BFlare-Technology:JB-Compressor:1.0.0'
-}
+   }
+```
 
 Usage
 Compress an Image File
@@ -53,15 +52,15 @@ The result will include:
 compressedBitmap: The compressed Bitmap.
 compressedBytes: The compressed image in byte array format, ideal for uploading to a server.
 Here’s an example:
-// Create an instance of ImageCompressionHandler
+ ```// Create an instance of ImageCompressionHandler
 val imageCompressionHandler = ImageCompressionHandler(this) { compressedBitmap, compressedBytes ->
-    // Handle the compressed results
-    Log.d("JB-Compressor", "Compressed Bitmap: $compressedBitmap")
-    Log.d("JB-Compressor", "Compressed Bytes: ${compressedBytes.size} bytes")
-}
-
-// Set the image URI string to compress the image
-imageCompressionHandler.setImageUriString("content://path/to/image")
+      // Handle the compressed results
+     }
+ ```
+Set the image URI string to compress the image
+ ```
+imageCompressionHandler.setImageUriString("imageUriString")
+ ```
 This approach ensures flexibility, allowing easy use of the compressed bitmap or byte array for further operations like uploading to a server or saving locally.
 
 

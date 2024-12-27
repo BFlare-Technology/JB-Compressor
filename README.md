@@ -28,13 +28,15 @@ JB-Compressor is a lightweight Android library for compressing image files and `
    ```
    dependencyResolutionManagement {
        repositories {
-           maven { url 'https://jitpack.io' }
+           maven {
+                 url = uri("https://jitpack.io")
+             }
        }
    }
 2. Add the library dependency in your module-level build.gradle:
  ```
  dependencies {
-    implementation 'com.github.BFlare-Technology:JB-Compressor:1.0.0'
+    implementation 'com.github.BFlare-Technology:JB-Compressor:1.0.1'
    }
 ```
 

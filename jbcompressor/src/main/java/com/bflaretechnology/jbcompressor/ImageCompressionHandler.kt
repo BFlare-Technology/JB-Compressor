@@ -7,10 +7,20 @@ import android.provider.OpenableColumns
 
 class ImageCompressionHandler(private val context: Context, val getCompressedBitmap:(compressedImage:Bitmap, compressedImageBytes:ByteArray )->Unit) {
 
-    fun setImageUriString(uriString: String){
+    fun setImageUriString(uriString: String, retainQuality: Int? = null){
+
+        val imageSize = getFileSizeFromUri(context, Uri.parse(uriString))
+        val compressAmount = retainQuality ?: when {
+            imageSize < 100 -> 85   // Small image, preserve quality
+            imageSize < 500 -> 75   // Medium image, moderate compression
+            imageSize < 1024 -> 70  // Larger image, compress more
+            imageSize < 2048 -> 65  // Very large
+            else -> 60              // Huge images, prioritize size reduction
+        }
+
         val compressImage = CompressImage(context){ compressedImage ->
             val backgroundBitmapToBytes = BackgroundBitmapToBytes()
-            backgroundBitmapToBytes.convertBitmapToBytes(compressedImage, getFileSizeFromUri(context, Uri.parse(uriString))){ compressedImageBytes ->
+            backgroundBitmapToBytes.convertBitmapToBytes(compressedImage, imageSize, compressAmount){ compressedImageBytes ->
                 getCompressedBitmap(compressedImage, compressedImageBytes)
             }
         }
@@ -18,7 +28,7 @@ class ImageCompressionHandler(private val context: Context, val getCompressedBit
 
     }
 
-    private fun getFileSizeFromUri(context: Context, uri: Uri): Double {
+    fun getFileSizeFromUri(context: Context, uri: Uri): Double {
         var size: Long = -1
         val cursor = context.contentResolver.query(uri, arrayOf(OpenableColumns.SIZE), null, null, null)
         cursor?.use {

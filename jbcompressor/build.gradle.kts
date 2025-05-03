@@ -50,7 +50,7 @@ publishing {
                 from(components["release"])
                 groupId = "com.github.BFlare-Technology"
                 artifactId = "JB-Compressor"
-                version = "1.0.0"
+                version = "2.0.0"
             }
         }
     }
